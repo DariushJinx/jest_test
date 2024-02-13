@@ -1,6 +1,46 @@
-import { getStringInfo, toUpperCase } from "../app/Utils";
+import { getStringInfo, StringUtils, toUpperCase } from "../app/Utils";
 
 describe("Utils test suite", () => {
+  describe("StringUtils tests", () => {
+    let sut: StringUtils;
+
+    beforeEach(() => {
+      sut = new StringUtils();
+    });
+
+    it.todo("test long strings");
+
+    it("Should return correct upperCase", () => {
+      const actual = sut.toUpperCase("abc");
+
+      expect(actual).toBe("ABC");
+    });
+
+    it("Should throw error on invalid argument - function", () => {
+      function expectError() {
+        const actual = sut.toUpperCase("");
+      }
+      expect(expectError).toThrow();
+      expect(expectError).toThrowError("Invalid argument!");
+    });
+
+    it("Should throw error on invalid argument - arrow function", () => {
+      expect(() => {
+        sut.toUpperCase("");
+      }).toThrowError("Invalid argument!");
+    });
+
+    it("Should throw error on invalid argument - try catch block", () => {
+      try {
+        sut.toUpperCase("");
+        fail("GetStringInfo should throw error for invalid arg!");
+      } catch (error) {
+        expect(error).toBeInstanceOf(Error);
+        expect(error).toHaveProperty("message", "Invalid argument!");
+      }
+    });
+  });
+
   it("should return uppercase of valid string", () => {
     // arrange :
     const sut = toUpperCase;
@@ -28,7 +68,17 @@ describe("Utils test suite", () => {
     });
     test("return right characters", () => {
       const actual = getStringInfo("My-String");
-      expect(actual.characters).toEqual(["M", "y", "-", "S", "t", "r", "i", "n", "g"]);
+      expect(actual.characters).toEqual([
+        "M",
+        "y",
+        "-",
+        "S",
+        "t",
+        "r",
+        "i",
+        "n",
+        "g",
+      ]);
       expect(actual.characters).toContain<string>("M");
       expect(actual.characters).toEqual(
         expect.arrayContaining(["S", "t", "r", "i", "n", "g", "M", "y", "-"])
@@ -46,7 +96,6 @@ describe("Utils test suite", () => {
   });
 
   describe("getStringInfo for arg My-String should_second", () => {
-
     test("return right length", () => {
       const actual = getStringInfo("My-String");
       expect(actual.characters).toHaveLength(9);
@@ -61,7 +110,17 @@ describe("Utils test suite", () => {
     });
     test("return right characters", () => {
       const actual = getStringInfo("My-String");
-      expect(actual.characters).toEqual(["M", "y", "-", "S", "t", "r", "i", "n", "g"]);
+      expect(actual.characters).toEqual([
+        "M",
+        "y",
+        "-",
+        "S",
+        "t",
+        "r",
+        "i",
+        "n",
+        "g",
+      ]);
       expect(actual.characters).toContain<string>("M");
       expect(actual.characters).toEqual(
         expect.arrayContaining(["S", "t", "r", "i", "n", "g", "M", "y", "-"])
